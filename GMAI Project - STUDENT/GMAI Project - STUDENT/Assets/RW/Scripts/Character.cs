@@ -40,7 +40,7 @@ namespace RayWenderlich.Unity.StatePatternInUnity
         public StateMachine movementSM;
         public StandingState standing;
         public DuckingState ducking;
-        public JumpingState jumping;
+        public JumpingState jumping; 
 
         //Melee actions 
         public StateMachine meleeSM; 
@@ -48,7 +48,12 @@ namespace RayWenderlich.Unity.StatePatternInUnity
         public DrawState drawing;  
         public DrawnState drawn;
         public SwingState swinging; 
-        public SheatheState sheathing; 
+        public SheatheState sheathing;   
+         
+        //Additional melee actions 
+        public PunchState punching; 
+        public ComboState combo;
+        public KickState kicking;
 
         [SerializeField]
         private Transform handTransform;
@@ -237,8 +242,11 @@ namespace RayWenderlich.Unity.StatePatternInUnity
             drawing = new DrawState(this, meleeSM);
             drawn = new DrawnState(this, meleeSM);
             swinging = new SwingState(this, meleeSM);
-            sheathing = new SheatheState(this, meleeSM);
-             
+            sheathing = new SheatheState(this, meleeSM); 
+            combo = new ComboState(this, meleeSM); 
+            punching = new PunchState(this, meleeSM);
+            kicking = new KickState(this, meleeSM);
+
             //Starting states
             movementSM.Initialize(standing);
             meleeSM.Initialize(melee);

@@ -5,11 +5,10 @@ namespace RayWenderlich.Unity.StatePatternInUnity
     public class SheatheState : State
     {
         private bool draw;
-        private bool unequipMelee;
+        private bool unequipMelee; 
+
         private int sheatheParam = Animator.StringToHash("SheathMelee");
         private int meleeParam = Animator.StringToHash("IsMelee");
-        private int swingParam = Animator.StringToHash("SwingMelee");
-        private int drawParam = Animator.StringToHash("DrawMelee");
 
         public SheatheState(Character character, StateMachine stateMachine) : base(character, stateMachine)
         {
