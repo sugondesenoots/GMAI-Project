@@ -43,7 +43,8 @@ namespace RayWenderlich.Unity.StatePatternInUnity
         public JumpingState jumping;
 
         //Melee actions 
-        public StateMachine meleeSM;
+        public StateMachine meleeSM; 
+        public MeleeState melee;
         public DrawState drawing;  
         public DrawnState drawn;
         public SwingState swinging; 
@@ -231,7 +232,8 @@ namespace RayWenderlich.Unity.StatePatternInUnity
             jumping = new JumpingState(this, movementSM);
 
             //Melee states 
-            meleeSM = new StateMachine();
+            meleeSM = new StateMachine(); 
+            melee = new MeleeState(this, meleeSM);
             drawing = new DrawState(this, meleeSM);
             drawn = new DrawnState(this, meleeSM);
             swinging = new SwingState(this, meleeSM);
@@ -239,7 +241,7 @@ namespace RayWenderlich.Unity.StatePatternInUnity
              
             //Starting states
             movementSM.Initialize(standing);
-            meleeSM.Initialize(sheathing);
+            meleeSM.Initialize(melee);
         }
 
         private void Update()

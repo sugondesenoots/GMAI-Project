@@ -41,6 +41,7 @@ namespace RayWenderlich.Unity.StatePatternInUnity
             else if (sheathe)
             {
                 stateMachine.ChangeState(character.sheathing);
+                Debug.Log("Sheathing weapon");
             }
         }
     }

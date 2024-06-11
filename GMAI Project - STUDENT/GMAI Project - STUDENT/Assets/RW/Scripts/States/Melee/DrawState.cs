@@ -28,6 +28,7 @@ namespace RayWenderlich.Unity.StatePatternInUnity
             if (drawn)
             {
                 stateMachine.ChangeState(character.drawn);
+                Debug.Log("Weapon is drawn");
             }
         }
     }

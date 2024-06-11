@@ -2,11 +2,14 @@ using UnityEngine;
 
 namespace RayWenderlich.Unity.StatePatternInUnity
 {
-    public class SheatheState : MeleeState
+    public class SheatheState : State
     {
         private bool draw;
+        private bool unequipMelee;
         private int sheatheParam = Animator.StringToHash("SheathMelee");
         private int meleeParam = Animator.StringToHash("IsMelee");
+        private int swingParam = Animator.StringToHash("SwingMelee");
+        private int drawParam = Animator.StringToHash("DrawMelee");
 
         public SheatheState(Character character, StateMachine stateMachine) : base(character, stateMachine)
         {
@@ -16,7 +19,6 @@ namespace RayWenderlich.Unity.StatePatternInUnity
         public override void Enter()
         {
             base.Enter();
-            character.SetAnimationBool(meleeParam, true);
             character.TriggerAnimation(sheatheParam);
             draw = false;
         }
@@ -25,6 +27,7 @@ namespace RayWenderlich.Unity.StatePatternInUnity
         {
             base.HandleInput();
             draw = Input.GetKeyDown(KeyCode.E);
+            unequipMelee = Input.GetKeyDown(KeyCode.X);
         }
 
         public override void LogicUpdate()
@@ -34,6 +37,14 @@ namespace RayWenderlich.Unity.StatePatternInUnity
             if (draw)
             {
                 stateMachine.ChangeState(character.drawing);
+                Debug.Log("Drawing weapon");
+            }
+            else if (unequipMelee) //Unequip melee is available only when it is in sheathe state
+            {
+                character.SetAnimationBool(meleeParam, false);
+                Debug.Log("Melee unequipped");
+
+                stateMachine.ChangeState(character.melee);
             }
         }
     }
