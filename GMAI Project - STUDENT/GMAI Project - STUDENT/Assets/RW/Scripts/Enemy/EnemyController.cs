@@ -1,18 +1,42 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class EnemyController : MonoBehaviour
 {
-    // Start is called before the first frame update
+    BaseState currentState; 
+     
+    //Animation components
+    public Animator animator; 
+     
+    //NavMesh components 
+    public NavMeshAgent enemyNPC;
+
     void Start()
     {
-        
+        currentState = new IdleState(this);
+
+        Debug.Log("Starting idle state...");
     }
 
-    // Update is called once per frame
     void Update()
     {
-        
+        RunStateMachine();
+    }
+
+    private void RunStateMachine()
+    {
+        BaseState nextState = currentState?.RunCurrentState();
+
+        if (nextState != null)
+        {
+            SwitchToNextState(nextState);
+        }
+    }
+
+    private void SwitchToNextState(BaseState nextState)
+    {
+        currentState = nextState;
     }
 }
+
+//Framework reference: https://www.youtube.com/watch?v=cnpJtheBLLY
