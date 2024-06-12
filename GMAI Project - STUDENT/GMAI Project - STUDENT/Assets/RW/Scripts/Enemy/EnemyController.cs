@@ -2,41 +2,40 @@ using UnityEngine;
 using UnityEngine.AI;
 
 public class EnemyController : MonoBehaviour
-{
-    BaseState currentState; 
+{ 
+    //Base state script
+    public BaseState currentState;
+
+    //State scripts 
+    public IdleState idleState; 
+    public PatrolState patrolState; 
+    public SeekState seekState; 
+    public AttackState attackState;
      
     //Animation components
     public Animator animator; 
      
     //NavMesh components 
     public NavMeshAgent enemyNPC;
+    public LayerMask ground, player;
+    public float rotationSpeed = 1f;
 
     void Start()
     {
-        currentState = new IdleState(this);
-
-        Debug.Log("Starting idle state...");
+        currentState = idleState;
+        currentState.Enter(this);
     }
 
     void Update()
     {
-        RunStateMachine();
+        currentState.Execute(this);
     }
 
-    private void RunStateMachine()
+    public void SwitchState(BaseState state)
     {
-        BaseState nextState = currentState?.RunCurrentState();
-
-        if (nextState != null)
-        {
-            SwitchToNextState(nextState);
-        }
-    }
-
-    private void SwitchToNextState(BaseState nextState)
-    {
-        currentState = nextState;
+        currentState = state;
+        state.Enter(this);
     }
 }
 
-//Framework reference: https://www.youtube.com/watch?v=cnpJtheBLLY
+//Framework: https://www.youtube.com/watch?v=Vt8aZDPzRjI

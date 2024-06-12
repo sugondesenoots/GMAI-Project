@@ -1,6 +1,6 @@
 using UnityEngine; 
 
-public abstract class BaseState
+public class BaseState : MonoBehaviour
 {
     protected EnemyController controller;
 
@@ -8,23 +8,21 @@ public abstract class BaseState
     {
         this.controller = controller;
     }  
-     
-    public abstract BaseState RunCurrentState();    
 
-    public virtual void Enter()
+    public virtual void Enter(EnemyController controller)
     {
 
     }
 
-    public virtual void Execute()
+    public virtual void Execute(EnemyController controller)
     {
 
     }
 
-    public virtual void Exit()
+    public virtual void Exit(EnemyController controller)
     {
 
     }
 }
 
-//Framework reference: https://www.youtube.com/watch?v=cnpJtheBLLY
+//Framework reference: https://www.youtube.com/watch?v=Vt8aZDPzRjI

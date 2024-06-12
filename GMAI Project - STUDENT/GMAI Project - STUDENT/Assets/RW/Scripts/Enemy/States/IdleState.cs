@@ -3,8 +3,7 @@ using UnityEngine;
 public class IdleState : BaseState
 { 
     //Needed scripts
-    private EnemyController enemyController; 
-    public PatrolState patrolState;
+    public EnemyController enemyController; 
 
     //Bools to control behaviours 
     public bool isResting;
@@ -18,27 +17,13 @@ public class IdleState : BaseState
         enemyController = controller;
     }
 
-    public override BaseState RunCurrentState()
-    {
-        if (!isResting)
-        {
-            return patrolState;
-        }
-        else
-        {
-            return this;
-        }
-    }
-
-    public override void Enter()
+    public override void Enter(EnemyController controller)
     {
         isResting = true;
-        enemyController.animator.SetTrigger("Idle");
-
         Debug.Log("Resting...");
     }
 
-    public override void Execute()
+    public override void Execute(EnemyController controller)
     {
         if (isResting)
         { 
@@ -49,17 +34,18 @@ public class IdleState : BaseState
             if (currentRestTime >= restTime)
             {
                 isResting = false; 
-                Exit();
+                Exit(enemyController);
 
                 Debug.Log("Rest time complete!");
+                enemyController.SwitchState(enemyController.patrolState); 
             }
         }
     }
 
-    public override void Exit()
+    public override void Exit(EnemyController controller)
     {
         currentRestTime = 0f; //Reset current rest time when exiting state
     }
 }
 
-//Framework reference: https://www.youtube.com/watch?v=cnpJtheBLLY
+//Framework reference: https://www.youtube.com/watch?v=Vt8aZDPzRjI

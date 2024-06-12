@@ -3,29 +3,24 @@ using UnityEngine.AI;
 
 public class AttackState : BaseState
 {
-    private EnemyController enemyController;
+    public EnemyController enemyController;
 
     public AttackState(EnemyController controller) : base(controller)
     {
         enemyController = controller;
     }
 
-    public override BaseState RunCurrentState()
-    {
-        return this;
-    }
-
-    public override void Enter()
+    public override void Enter(EnemyController controller)
     {
 
     }
 
-    public override void Execute()
+    public override void Execute(EnemyController controller)
     {
 
     }
 
-    public override void Exit()
+    public override void Exit(EnemyController controller)
     {
 
     }

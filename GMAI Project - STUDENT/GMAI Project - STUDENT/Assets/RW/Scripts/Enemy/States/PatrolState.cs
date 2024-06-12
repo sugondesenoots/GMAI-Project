@@ -1,76 +1,88 @@
+using System.Drawing;
 using UnityEngine;
 using UnityEngine.AI;
 
 public class PatrolState : BaseState
-{ 
+{
     //Needed scripts
-    private EnemyController enemyController; 
-    public SeekState seekState;
+    public EnemyController enemyController; 
 
     //Bools to handle behaviours
     public bool seePlayer;
-    private bool isMoving;
 
-    //Variables to control patrollings
-    public float patrolRange = 10f;
-    private Vector3 patrolPos;
+    //Variables for patrolling
+    public float patrolRange; 
+    public Transform centrePoint;
+
+    //Variables to control rest 
+    public float timeTillRest = 10f;
 
     public PatrolState(EnemyController controller) : base(controller)
     {
         enemyController = controller;
     }
 
-    public override BaseState RunCurrentState()
+    public override void Enter(EnemyController controller)
     {
-        if (seePlayer)
-        {
-            return seekState;
-        } 
-        else
-        {
-            return this;
-        }
+        seePlayer = false;
+        Debug.Log("Patrolling surroundings...");
     }
 
-    public override void Enter()
+    public override void Execute(EnemyController controller)
     {
-        seePlayer = false; 
-        SetPatrolPos();
-    }
+        //Updates time till rest
+        timeTillRest -= Time.deltaTime;
 
-    public override void Execute()
-    {
-        if (!isMoving)
+        enemyController.animator.SetBool("isPatrol", true);
+
+        if (enemyController.enemyNPC.remainingDistance <= enemyController.enemyNPC.stoppingDistance) //Checks if enemy npc is done pathing
         {
-            //Checks if it has reached the destination
-            if (!enemyController.enemyNPC.pathPending && enemyController.enemyNPC.remainingDistance <= enemyController.enemyNPC.stoppingDistance)
+            Vector3 point; 
+
+            if (RandomPoint(centrePoint.position, patrolRange, out point)) //Pass in our centre point and radius of area
             {
-                isMoving = false;
-                SetPatrolPos();
+                //Debug.DrawRay(point, Vector3.up, Color.blue, 1.0f); //Visualizes it if you use gizmos
+                enemyController.enemyNPC.SetDestination(point);
             }
         }
-    }
+        else if (seePlayer)
+        {
+            enemyController.SwitchState(enemyController.seekState);
+            Debug.Log("Chasing player!");
 
-    public override void Exit()
-    {
+            Exit(controller);
+        } 
+        else if (timeTillRest <= 0f)
+        {
+            enemyController.SwitchState(enemyController.idleState);
+            enemyController.animator.SetBool("isPatrol", false);
+            Debug.Log("Going to rest...");
+            enemyController.enemyNPC.SetDestination(enemyController.enemyNPC.transform.position);
 
-    }
-
-    private void SetPatrolPos()
-    {
-        //Sets a random position within the patrolling range
-        Vector3 randomPosition = Random.insideUnitSphere * patrolRange + enemyController.transform.position;
-
-        NavMeshHit hit;
-
-        //Checks if the given position is on the NavMeshSurface
-        if (NavMesh.SamplePosition(randomPosition, out hit, patrolRange, NavMesh.AllAreas))
-        { 
-            patrolPos = hit.position;
-            enemyController.enemyNPC.SetDestination(patrolPos); 
-
-            isMoving = true;
-            enemyController.animator.SetTrigger("Patrol");
+            Exit(controller);
         }
     }
+
+    public override void Exit(EnemyController controller)
+    {
+        timeTillRest = 10f; //Reset time till rest
+    }
+
+    bool RandomPoint(Vector3 center, float range, out Vector3 result)
+    {
+        Vector3 randomPoint = center + Random.insideUnitSphere * range; //Sets a random point in a sphere 
+        NavMeshHit hit; 
+
+        if (NavMesh.SamplePosition(randomPoint, out hit, 1.0f, NavMesh.AllAreas)) 
+        {
+            result = hit.position;
+            return true;
+        }
+
+        result = Vector3.zero;
+        return false;
+    }
 }
+
+//Reference: https://www.youtube.com/watch?v=dYs0WRzzoRc&list=LL&index=1 
+//Documentation: https://docs.unity3d.com/ScriptReference/AI.NavMesh.SamplePosition.html 
