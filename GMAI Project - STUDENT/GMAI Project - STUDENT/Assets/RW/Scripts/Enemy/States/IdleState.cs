@@ -26,7 +26,9 @@ public class IdleState : BaseState
     public override void Execute(EnemyController controller)
     {
         if (isResting)
-        { 
+        {
+            enemyController.animator.SetBool("Patrol", false);
+
             //Updates current rest time
             currentRestTime += Time.deltaTime;
 

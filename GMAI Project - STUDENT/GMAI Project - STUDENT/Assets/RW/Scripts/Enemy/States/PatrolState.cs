@@ -1,17 +1,16 @@
-using System.Drawing;
 using UnityEngine;
 using UnityEngine.AI;
 
 public class PatrolState : BaseState
 {
     //Needed scripts
-    public EnemyController enemyController; 
+    public EnemyController enemyController;
 
     //Bools to handle behaviours
     public bool seePlayer;
 
     //Variables for patrolling
-    public float patrolRange; 
+    public float range;
     public Transform centrePoint;
 
     //Variables to control rest 
@@ -30,21 +29,21 @@ public class PatrolState : BaseState
 
     public override void Execute(EnemyController controller)
     {
+        enemyController.animator.SetBool("Patrol", true);
+
         //Updates time till rest
         timeTillRest -= Time.deltaTime;
 
-        enemyController.animator.SetBool("isPatrol", true);
-
-        if (enemyController.enemyNPC.remainingDistance <= enemyController.enemyNPC.stoppingDistance) //Checks if enemy npc is done pathing
+        if (enemyController.enemyNPC.remainingDistance <= enemyController.enemyNPC.stoppingDistance) //Completed pathing
         {
-            Vector3 point; 
-
-            if (RandomPoint(centrePoint.position, patrolRange, out point)) //Pass in our centre point and radius of area
+            Vector3 point;
+            if (RandomPoint(centrePoint.position, range, out point)) //Passes in our centre point and radius of area
             {
-                //Debug.DrawRay(point, Vector3.up, Color.blue, 1.0f); //Visualizes it if you use gizmos
+                Debug.DrawRay(point, Vector3.up, Color.blue, 1.0f); //Allows for visuals with/using gizmos
                 enemyController.enemyNPC.SetDestination(point);
             }
-        }
+        } 
+
         else if (seePlayer)
         {
             enemyController.SwitchState(enemyController.seekState);
@@ -52,10 +51,12 @@ public class PatrolState : BaseState
 
             Exit(controller);
         } 
+
         else if (timeTillRest <= 0f)
         {
             enemyController.SwitchState(enemyController.idleState);
-            enemyController.animator.SetBool("isPatrol", false);
+            enemyController.animator.SetBool("Patrol", false);
+
             Debug.Log("Going to rest...");
             enemyController.enemyNPC.SetDestination(enemyController.enemyNPC.transform.position);
 
@@ -70,10 +71,11 @@ public class PatrolState : BaseState
 
     bool RandomPoint(Vector3 center, float range, out Vector3 result)
     {
-        Vector3 randomPoint = center + Random.insideUnitSphere * range; //Sets a random point in a sphere 
+        Vector3 randomPoint = center + Random.insideUnitSphere * range; //Random point in a sphere  
+
         NavMeshHit hit; 
 
-        if (NavMesh.SamplePosition(randomPoint, out hit, 1.0f, NavMesh.AllAreas)) 
+        if (NavMesh.SamplePosition(randomPoint, out hit, 1.0f, NavMesh.AllAreas))
         {
             result = hit.position;
             return true;

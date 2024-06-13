@@ -12,13 +12,14 @@ public class EnemyController : MonoBehaviour
     public SeekState seekState; 
     public AttackState attackState;
      
-    //Animation components
-    public Animator animator; 
-     
+    //Animatior components
+    public Animator animator;
+
     //NavMesh components 
-    public NavMeshAgent enemyNPC;
+    public NavMeshAgent enemyNPC; 
+     
+    //Navigation components
     public LayerMask ground, player;
-    public float rotationSpeed = 1f;
 
     void Start()
     {
@@ -38,4 +39,4 @@ public class EnemyController : MonoBehaviour
     }
 }
 
-//Framework: https://www.youtube.com/watch?v=Vt8aZDPzRjI
+//Framework: https://www.youtube.com/watch?v=Vt8aZDPzRjI 
