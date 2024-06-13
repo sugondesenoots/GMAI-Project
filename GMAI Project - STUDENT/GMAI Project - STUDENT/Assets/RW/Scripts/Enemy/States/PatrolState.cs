@@ -87,17 +87,17 @@ public class PatrolState : BaseState
         return false;
     }
 
-    private void DetectPlayer()
+    public void DetectPlayer()
     {
         RaycastHit hit;
 
         //Raycasting from enemy npc transform.forward
-        if (Physics.Raycast(enemyController.transform.position, enemyController.transform.forward, out hit, 10f))
+        if (Physics.Raycast(transform.position, transform.forward, out hit, 10f))
         {
             //Checks if the raycast hits Player object
             if (hit.collider.CompareTag("Player"))
-            { 
-                seePlayer = true;   
+            {
+                seePlayer = true;
             }
         }
     }

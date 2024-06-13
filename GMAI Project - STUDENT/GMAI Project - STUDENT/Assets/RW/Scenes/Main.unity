@@ -7535,6 +7535,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyController: {fileID: 819742460}
+  player: {fileID: 1252697822}
 --- !u!1 &2124711800
 GameObject:
   m_ObjectHideFlags: 0
