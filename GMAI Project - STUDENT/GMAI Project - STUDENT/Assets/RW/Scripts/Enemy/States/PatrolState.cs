@@ -29,6 +29,8 @@ public class PatrolState : BaseState
 
     public override void Execute(EnemyController controller)
     {
+        DetectPlayer();
+
         enemyController.animator.SetBool("Patrol", true);
 
         //Updates time till rest
@@ -62,7 +64,7 @@ public class PatrolState : BaseState
 
             Exit(controller);
         }
-    }
+    } 
 
     public override void Exit(EnemyController controller)
     {
@@ -83,6 +85,21 @@ public class PatrolState : BaseState
 
         result = Vector3.zero;
         return false;
+    }
+
+    private void DetectPlayer()
+    {
+        RaycastHit hit;
+
+        //Raycasting from enemy npc transform.forward
+        if (Physics.Raycast(enemyController.transform.position, enemyController.transform.forward, out hit, 10f))
+        {
+            //Checks if the raycast hits Player object
+            if (hit.collider.CompareTag("Player"))
+            { 
+                seePlayer = true;   
+            }
+        }
     }
 }
 
