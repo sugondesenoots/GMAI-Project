@@ -1,8 +1,25 @@
 tree("Root") 
     repeat
         fallback
-            tree("CreatureIdle")
+            tree("CreatureIdle") 
+            tree("CreatureRoam") 
+            tree("CreatureRetreat")
 
 tree("CreatureIdle")
     sequence
-        IsIdleState
+        IsIdleState  
+        CheckForOthersIdle
+        SwitchToRoam 
+         
+tree("CreatureRoam")
+    sequence
+        IsRoamState  
+        Roam
+        CheckForOthersRoam
+        SwitchToRetreatOrFollow
+         
+tree("CreatureRetreat")
+    sequence
+        IsRetreatState 
+        Retreat   
+        SwitchToIdle

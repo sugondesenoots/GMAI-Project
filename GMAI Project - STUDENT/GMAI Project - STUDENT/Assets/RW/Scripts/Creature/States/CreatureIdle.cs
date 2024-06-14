@@ -5,6 +5,7 @@ public class CreatureIdle : MonoBehaviour
 {
     public CreatureStateManager _stateManager;
     private bool isOthers;
+    public float checkRadius = 3f;
 
     public void Initialize(CreatureStateManager stateManager)
     {
@@ -14,14 +15,14 @@ public class CreatureIdle : MonoBehaviour
     [Task]
     public bool IsIdleState()
     {
-        return _stateManager.currentStateName == "Idle"; 
+        return _stateManager.currentStateName == "CreatureIdle";
     }
 
     [Task]
-    void CheckForOthers()
+    void CheckForOthersIdle()
     {
-        isOthers = false; // Reset the state
-        float checkRadius = 10f; // Define the radius to check for others
+        isOthers = false; 
+
         Collider[] hitColliders = Physics.OverlapSphere(transform.position, checkRadius);
 
         foreach (var hitCollider in hitColliders)
@@ -30,11 +31,17 @@ public class CreatureIdle : MonoBehaviour
             {
                 isOthers = true;
                 _stateManager.animator.SetBool("isOthers", true);
+                Debug.Log("Detected other beings, hiding...");
                 break;
+            } 
+            else
+            {
+                isOthers = false;
+                Debug.Log("No other beings, roaming...");
+                Task.current.Succeed();
+                break; 
             }
         }
-
-        Task.current.Succeed();
     }
 
     [Task]
@@ -42,8 +49,10 @@ public class CreatureIdle : MonoBehaviour
     {
         if (!isOthers)
         {
-            _stateManager.SetCurrentState("Roam");
+            _stateManager.SetCurrentState("CreatureRoam");
             Task.current.Succeed();
+
+            Debug.Log("Switching to roaming");
         }
         else
         {
