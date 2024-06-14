@@ -5,6 +5,7 @@ using UnityEngine.AI;
 public class CreatureRoam : MonoBehaviour
 {
     public CreatureStateManager _stateManager;
+    public Inventory inventory;
 
     //Roaming variables
     public NavMeshAgent creatureAgent;
@@ -14,7 +15,6 @@ public class CreatureRoam : MonoBehaviour
      
     //Bools for state transitions
     private bool isOthers;
-    private bool hasFood;
     public float checkRadius = 3f;
 
     public void Initialize(CreatureStateManager stateManager, NavMeshAgent agent, Transform centre, float range)
@@ -58,13 +58,8 @@ public class CreatureRoam : MonoBehaviour
             if (hitCollider.CompareTag("EnemyNPC") || hitCollider.CompareTag("Player"))
             {
                 isOthers = true;
-                //_stateManager.animator.SetBool("isOthers", true);
                 break;
             } 
-            else if (hasFood)
-            {
-                //Logic for checking if player inventory has food
-            }
             else
             {
                 isOthers = false;
@@ -82,11 +77,11 @@ public class CreatureRoam : MonoBehaviour
             _stateManager.SetCurrentState("CreatureRetreat");
             Task.current.Succeed();
         }
-        //else if (hasFood)
-        //{
-        //    _stateManager.SetCurrentState("CreatureFollowFood");
-        //    Task.current.Succeed();
-        //}
+        if (inventory.playerHasFood && isOthers)
+        {
+            _stateManager.SetCurrentState("CreatureFollowFood");
+            Task.current.Succeed();
+        }
         else
         {
             Task.current.Fail();

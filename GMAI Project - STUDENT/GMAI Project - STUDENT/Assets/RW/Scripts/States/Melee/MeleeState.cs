@@ -42,25 +42,25 @@ namespace RayWenderlich.Unity.StatePatternInUnity
             if (equipMelee)
             {
                 character.SetAnimationBool(meleeParam, true);
-                Debug.Log("Melee equipped");
+                //Debug.Log("Melee equipped");
 
                 stateMachine.ChangeState(character.sheathing);
-                Debug.Log("Going into sheathed state");
+                //Debug.Log("Going into sheathed state");
             } 
             else if (!equipMelee && punch)
             {
                 stateMachine.ChangeState(character.punching);
-                Debug.Log("Going into punch state");
+                //Debug.Log("Going into punch state");
             }
             else if (!equipMelee && combo)
             {
                 stateMachine.ChangeState(character.combo);
-                Debug.Log("Going into combo state");
+                //Debug.Log("Going into combo state");
             }
             else if (!equipMelee && kick)
             {
                 stateMachine.ChangeState(character.kicking);
-                Debug.Log("Going into kicking state");
+                //Debug.Log("Going into kicking state");
             }
         }
     } 

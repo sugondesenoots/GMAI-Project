@@ -10,8 +10,10 @@ public class Inventory : MonoBehaviour
     public GameObject foodPrefab;
     private GameObject foodInRange;
 
-    public bool foodTaken = false;
-    private bool isPlayerInRange = false;
+    public bool foodTaken = false;  
+    public bool playerHasFood = false;
+    public bool placedFood = false;
+    private bool isPlayerInRange = false; 
 
     private void Awake()
     {
@@ -82,13 +84,20 @@ public class Inventory : MonoBehaviour
     {
         if (!foodTaken && foodInRange != null)
         {
-            Item itemToAdd = new Item("Food", 1); //Creates a new instance of Item with count 1, allows replay of placing and picking up object
+            //Creates a new instance of Item with count 1, allows replay of placing and picking up object
+            Item itemToAdd = new Item("Food", 1); 
             AddItem(itemToAdd);
 
             foodTaken = true;
-            Destroy(foodInRange); 
-            foodInRange = null; //Resets foodInRange reference
-        }
+            Destroy(foodInRange);
+
+            //Resets foodInRange reference 
+            foodInRange = null;  
+             
+            //Bools for FollowFood state
+            playerHasFood = true;
+            placedFood = false;
+}
     }
 
     private void PlaceItem()
@@ -113,6 +122,8 @@ public class Inventory : MonoBehaviour
             Debug.Log("Food is placed!");
 
             foodTaken = false;
+            playerHasFood = false;
+            placedFood = true;
         }
         else
         {

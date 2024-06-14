@@ -4878,12 +4878,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   items: []
-  item:
-    itemName: Food
-    itemCount: 1
   foodPrefab: {fileID: 3939692556137788387, guid: a499c32ad5e862345bb87497182237f2,
     type: 3}
   foodTaken: 0
+  playerHasFood: 0
 --- !u!65 &1252697828
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5947,6 +5945,14 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1931298151966786, guid: 928a1377c1cd4515b208fef3a396b8ea,
         type: 3}
       insertIndex: -1
+      addedObject: {fileID: 1998561369}
+    - targetCorrespondingSourceObject: {fileID: 1931298151966786, guid: 928a1377c1cd4515b208fef3a396b8ea,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1998561368}
+    - targetCorrespondingSourceObject: {fileID: 1931298151966786, guid: 928a1377c1cd4515b208fef3a396b8ea,
+        type: 3}
+      insertIndex: -1
       addedObject: {fileID: 1998561367}
   m_SourcePrefab: {fileID: 100100000, guid: 928a1377c1cd4515b208fef3a396b8ea, type: 3}
 --- !u!1 &1404417957 stripped
@@ -5995,6 +6001,8 @@ MonoBehaviour:
   creatureIdle: {fileID: 1404417962}
   creatureRoam: {fileID: 1404417961}
   creatureRetreat: {fileID: 1404417960}
+  creatureFollowFood: {fileID: 1998561369}
+  creatureEat: {fileID: 1998561368}
   currentStateName: CreatureIdle
 --- !u!114 &1404417960
 MonoBehaviour:
@@ -6024,6 +6032,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _stateManager: {fileID: 1404417959}
+  inventory: {fileID: 1252697827}
   creatureAgent: {fileID: 1998561367}
   roamRange: 5
   centrePoint: {fileID: 1292281860}
@@ -7623,6 +7632,34 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &1998561368
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1404417957}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a18bfeca6699494d84a6137e74cf4b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1998561369
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1404417957}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2cbe6f258f2d39a48b36019505ef360f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _stateManager: {fileID: 1404417959}
+  inventory: {fileID: 1252697827}
+  checkRadius: 10
+  player: {fileID: 1252697822}
 --- !u!1 &2067796074
 GameObject:
   m_ObjectHideFlags: 0

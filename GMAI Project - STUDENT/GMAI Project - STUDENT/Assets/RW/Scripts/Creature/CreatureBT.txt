@@ -3,7 +3,8 @@ tree("Root")
         fallback
             tree("CreatureIdle") 
             tree("CreatureRoam") 
-            tree("CreatureRetreat")
+            tree("CreatureRetreat") 
+            tree("CreatureFollowFood")
 
 tree("CreatureIdle")
     sequence
@@ -22,4 +23,13 @@ tree("CreatureRetreat")
     sequence
         IsRetreatState 
         Retreat   
-        SwitchToIdle
+        SwitchToIdle 
+         
+tree("CreatureFollowFood") 
+    fallback
+        sequence
+            IsFollowFoodState
+            FollowFood
+        sequence 
+            IsFollowFoodState
+            SwitchToRoamOrEat

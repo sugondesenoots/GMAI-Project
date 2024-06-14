@@ -11,23 +11,15 @@ public class CreatureStateManager : MonoBehaviour
     //State scripts
     public CreatureIdle creatureIdle;
     public CreatureRoam creatureRoam;
-    public CreatureRetreat creatureRetreat; 
+    public CreatureRetreat creatureRetreat;  
+    public CreatureFollowFood creatureFollowFood;
+    public CreatureEat creatureEat; 
 
     public string currentStateName;
 
     private void Start()
     {
         SetCurrentState("CreatureIdle");
-
-        ////Initialize all states
-        //creatureIdle.Initialize(this);
-        //creatureRoam.Initialize(this);
-        //creatureRetreat.Initialize(this);
-    }
-
-    private void Update()
-    {
-
     }
 
     public void SetCurrentState(string stateName)
