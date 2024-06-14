@@ -1,0 +1,8 @@
+tree("Root") 
+    repeat
+        fallback
+            tree("CreatureIdle")
+
+tree("CreatureIdle")
+    sequence
+        IsIdleState

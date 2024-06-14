@@ -7,7 +7,10 @@ public class SeekState : BaseState
 
     //Bools to handle state transitions
     private bool inAttackRange;
-    private bool seePlayer;
+    private bool seePlayer; 
+
+    public float seekRange = 10f;
+    public float attackRange = 1f;
 
     //Player component 
     public GameObject player;
@@ -26,6 +29,8 @@ public class SeekState : BaseState
     {
         seePlayer = true; 
         Debug.Log("Seeking player...");
+
+        enemyController.animator.SetBool("Seek", true);
     }
 
     public override void Execute(EnemyController controller)
@@ -51,7 +56,7 @@ public class SeekState : BaseState
 
         if (inAttackRange) //Switches to AttackState if in attack range
         {
-            //enemyController.SwitchState(enemyController.attackState); 
+            enemyController.SwitchState(enemyController.attackState); 
             Debug.Log("Attack State");
 
             Exit(controller);
@@ -77,9 +82,6 @@ public class SeekState : BaseState
 
     private void CheckPlayerStatus()
     {
-        float seekRange = 10f;
-        float attackRange = 1f;
-
         float distanceToPlayer = Vector3.Distance(enemyController.transform.position, player.transform.position);
 
         if (distanceToPlayer <= seekRange)
@@ -89,7 +91,7 @@ public class SeekState : BaseState
             //Checks if player is within attack range
             if (distanceToPlayer <= attackRange)
             {
-                inAttackRange = true;
+                inAttackRange = true; 
             }
             else
             {

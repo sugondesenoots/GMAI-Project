@@ -1883,7 +1883,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyController: {fileID: 819742460}
   seePlayer: 0
-  range: 20
+  range: 30
   centrePoint: {fileID: 1252697823}
   timeTillRest: 10
 --- !u!1 &629873126
@@ -6217,6 +6217,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyController: {fileID: 819742460}
+  attackRange: 1.5
+  player: {fileID: 1252697822}
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 8192
 --- !u!1 &1557346060
 GameObject:
   m_ObjectHideFlags: 0
@@ -7535,6 +7540,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyController: {fileID: 819742460}
+  seekRange: 10
+  attackRange: 1.5
   player: {fileID: 1252697822}
 --- !u!1 &2124711800
 GameObject:
