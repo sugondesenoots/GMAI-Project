@@ -2371,7 +2371,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &819742457
 Transform:
   m_ObjectHideFlags: 0
@@ -4882,6 +4882,7 @@ MonoBehaviour:
     type: 3}
   foodTaken: 0
   playerHasFood: 0
+  placedFood: 0
 --- !u!65 &1252697828
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -7624,7 +7625,7 @@ NavMeshAgent:
   m_Acceleration: 1
   avoidancePriority: 50
   m_AngularSpeed: 120
-  m_StoppingDistance: 0.1
+  m_StoppingDistance: 2
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
@@ -7644,6 +7645,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a18bfeca6699494d84a6137e74cf4b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _stateManager: {fileID: 1404417959}
+  foodEaten: 0
 --- !u!114 &1998561369
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7658,8 +7661,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _stateManager: {fileID: 1404417959}
   inventory: {fileID: 1252697827}
-  checkRadius: 10
   player: {fileID: 1252697822}
+  checkRadius: 10
 --- !u!1 &2067796074
 GameObject:
   m_ObjectHideFlags: 0

@@ -4,7 +4,8 @@ tree("Root")
             tree("CreatureIdle") 
             tree("CreatureRoam") 
             tree("CreatureRetreat") 
-            tree("CreatureFollowFood")
+            tree("CreatureFollowFood") 
+            tree("CreatureEat")
 
 tree("CreatureIdle")
     sequence
@@ -32,4 +33,10 @@ tree("CreatureFollowFood")
             FollowFood
         sequence 
             IsFollowFoodState
-            SwitchToRoamOrEat
+            SwitchToRoamOrEat 
+         
+tree("CreatureEat")
+    sequence
+        IsEatState  
+        Eating 
+        SwitchToRoamEat 

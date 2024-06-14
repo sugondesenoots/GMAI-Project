@@ -6,9 +6,10 @@ public class CreatureFollowFood : MonoBehaviour
 {
     public CreatureStateManager _stateManager;
     public Inventory inventory;
-    public float checkRadius = 10f; //Radius where creature follows food 
 
     public GameObject player;
+
+    public float checkRadius = 10f; //Radius where creature follows food 
 
     public void Initialize(CreatureStateManager stateManager)
     {

@@ -80,6 +80,11 @@ public class Inventory : MonoBehaviour
         }
     }
 
+    public GameObject GetFoodInRange()
+    {
+        return foodInRange;
+    }
+
     private void PickUpItem()
     {
         if (!foodTaken && foodInRange != null)
