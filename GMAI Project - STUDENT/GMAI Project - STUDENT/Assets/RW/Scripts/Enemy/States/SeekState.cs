@@ -31,6 +31,13 @@ public class SeekState : BaseState
         Debug.Log("Seeking player...");
          
         enemyController.animator.SetBool("Seek", true);
+        enemyController.animator.SetBool("Roar", false);
+        enemyController.animator.SetBool("Patrol", false);
+
+        //Stores the original parameters for exit function
+        originalSpeed = enemyController.enemyNPC.speed;
+        originalAcceleration = enemyController.enemyNPC.acceleration;
+        originalAngularSpeed = enemyController.enemyNPC.angularSpeed;
     }
 
     public override void Execute(EnemyController controller)
@@ -41,11 +48,6 @@ public class SeekState : BaseState
         //Sets the chase/seek animation + Updates player position when enemy npc is seeking player
         enemyController.enemyNPC.SetDestination(playerPos);
         enemyController.animator.SetBool("Seek", true);
-
-        //Stores the original parameters for exit function
-        originalSpeed = enemyController.enemyNPC.speed;
-        originalAcceleration = enemyController.enemyNPC.acceleration;
-        originalAngularSpeed = enemyController.enemyNPC.angularSpeed;
 
         //Increases steering parameters when chasing player
         enemyController.enemyNPC.speed = 3f;
@@ -68,7 +70,7 @@ public class SeekState : BaseState
             Debug.Log("Patrol State");
 
             Exit(controller);
-        } 
+        }  
     }
 
     public override void Exit(EnemyController controller)

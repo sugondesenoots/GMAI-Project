@@ -3,7 +3,9 @@ using UnityEngine.AI;
 
 public class RoarState : BaseState
 {
-    public EnemyController enemyController;
+    public EnemyController enemyController;  
+    public SeekState seekState;
+
     public float roarDuration = 2f; //Check animation length and input respective length
     private float roarTimer = 0f;
 
@@ -13,7 +15,7 @@ public class RoarState : BaseState
     }
 
     public override void Enter(EnemyController controller)
-    {
+    { 
         Debug.Log("Enter Roar State");
 
         //Set the destination to the current position so npc stay stills while roaring
@@ -29,9 +31,8 @@ public class RoarState : BaseState
 
         //Checks if the roar animation has finished
         if (roarTimer >= roarDuration)
-        {
+        { 
             enemyController.SwitchState(enemyController.seekState);
-
             Exit(controller);
         }
     }

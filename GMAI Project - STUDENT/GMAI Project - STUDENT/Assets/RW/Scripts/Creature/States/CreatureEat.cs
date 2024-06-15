@@ -9,7 +9,7 @@ public class CreatureEat : MonoBehaviour
      
     //Eating duration
     private float eatTimePassed = 0f;
-    private float eatDuration = 5f; 
+    private float eatDuration = 3f; 
 
     public void Initialize(CreatureStateManager stateManager)
     {

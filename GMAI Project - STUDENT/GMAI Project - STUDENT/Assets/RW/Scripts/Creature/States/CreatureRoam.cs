@@ -40,7 +40,7 @@ public class CreatureRoam : MonoBehaviour
         {
             if (RandomPoint(centrePoint.position, roamRange, out roamDestination))
             {
-                Debug.DrawRay(roamDestination, Vector3.up, Color.blue, 1.0f);
+                Debug.DrawRay(roamDestination, Vector3.up, Color.blue, 1.0f); //Visuals using gizmos
                 creatureAgent.SetDestination(roamDestination);
             }
         } 
@@ -74,8 +74,6 @@ public class CreatureRoam : MonoBehaviour
     [Task]
     void SwitchToRetreatOrFollow()
     {
-        _stateManager.animator.SetBool("SenseOthers", true);
-
         senseTimePassed += Time.deltaTime;
 
         //Check if sense duration has passed

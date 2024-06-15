@@ -30,7 +30,6 @@ public class CreatureIdle : MonoBehaviour
             if (hitCollider.CompareTag("EnemyNPC") || hitCollider.CompareTag("Player"))
             {
                 isOthers = true;
-                _stateManager.animator.SetBool("isOthers", true);
                 Debug.Log("Detected other beings, hiding...");
                 break;
             } 

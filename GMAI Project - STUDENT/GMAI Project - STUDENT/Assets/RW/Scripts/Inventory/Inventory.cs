@@ -114,7 +114,7 @@ public class Inventory : MonoBehaviour
 
             Vector3 playerPosition = transform.position;
             Vector3 playerForward = transform.forward;
-            float distanceAhead = 1.0f;
+            float distanceAhead = 0.5f;
             Vector3 spawnPosition = playerPosition + playerForward * distanceAhead;
 
             RaycastHit hit;

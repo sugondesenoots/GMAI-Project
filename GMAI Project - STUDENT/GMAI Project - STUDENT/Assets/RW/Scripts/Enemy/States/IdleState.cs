@@ -14,13 +14,14 @@ public class IdleState : BaseState
 
     public IdleState(EnemyController controller) : base(controller)
     {
-        enemyController = controller;
+        enemyController = controller; 
     }
 
     public override void Enter(EnemyController controller)
     {
         isResting = true;
         Debug.Log("Resting...");
+        enemyController.animator.SetBool("Idle", true);
     }
 
     public override void Execute(EnemyController controller)
@@ -46,7 +47,8 @@ public class IdleState : BaseState
 
     public override void Exit(EnemyController controller)
     {
-        currentRestTime = 0f; //Reset current rest time when exiting state
+        currentRestTime = 0f; //Reset current rest time when exiting state 
+        enemyController.animator.SetBool("Idle", false);
     }
 }
 

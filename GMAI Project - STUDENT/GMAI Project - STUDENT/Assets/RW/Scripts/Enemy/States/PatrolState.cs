@@ -25,6 +25,7 @@ public class PatrolState : BaseState
     {
         seePlayer = false;
         Debug.Log("Patrolling surroundings...");
+        enemyController.animator.SetBool("Roar", false);
     }
 
     public override void Execute(EnemyController controller)
@@ -38,7 +39,8 @@ public class PatrolState : BaseState
 
         if (enemyController.enemyNPC.remainingDistance <= enemyController.enemyNPC.stoppingDistance) //Completed pathing
         {
-            Vector3 point;
+            Vector3 point; 
+
             if (RandomPoint(centrePoint.position, range, out point)) //Passes in our centre point and radius of area
             {
                 Debug.DrawRay(point, Vector3.up, Color.blue, 1.0f); //Allows for visuals with/using gizmos
@@ -57,7 +59,6 @@ public class PatrolState : BaseState
         else if (timeTillRest <= 0f)
         {
             enemyController.SwitchState(enemyController.idleState);
-            enemyController.animator.SetBool("Patrol", false);
 
             Debug.Log("Going to rest...");
             enemyController.enemyNPC.SetDestination(enemyController.enemyNPC.transform.position);
@@ -68,7 +69,7 @@ public class PatrolState : BaseState
 
     public override void Exit(EnemyController controller)
     {
-        timeTillRest = 10f; //Reset time till rest
+        timeTillRest = 10f; //Reset time till rest 
     }
 
     bool RandomPoint(Vector3 center, float range, out Vector3 result)
@@ -91,8 +92,10 @@ public class PatrolState : BaseState
     {
         RaycastHit hit;
 
-        //Raycasting from enemy npc transform.forward
-        if (Physics.Raycast(transform.position, transform.forward, out hit, 10f))
+        //Raycasting from enemy npc transform.forward 
+        //Calculate length by (seekLength - player.x) = 10f - 2f = 8f - 1f = 7f
+        //Ensures animation when exiting SeekState while running is consistent
+        if (Physics.Raycast(transform.position, transform.forward, out hit, 7f)) 
         {
             //Checks if the raycast hits Player object
             if (hit.collider.CompareTag("Player"))
