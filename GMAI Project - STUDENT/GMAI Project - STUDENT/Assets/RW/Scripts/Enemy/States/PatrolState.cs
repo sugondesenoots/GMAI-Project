@@ -48,8 +48,8 @@ public class PatrolState : BaseState
 
         else if (seePlayer)
         {
-            enemyController.SwitchState(enemyController.seekState);
-            Debug.Log("Chasing player!");
+            enemyController.SwitchState(enemyController.roarState);
+            Debug.Log("Aggressing player!");
 
             Exit(controller);
         } 

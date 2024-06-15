@@ -9,8 +9,9 @@ public class EnemyController : MonoBehaviour
     //State scripts 
     public IdleState idleState; 
     public PatrolState patrolState; 
-    public SeekState seekState; 
-    public AttackState attackState;
+    public SeekState seekState;  
+    public RoarState roarState;
+    public AttackState attackState; 
      
     //Animatior components
     public Animator animator;

@@ -132,6 +132,52 @@ Animator:
     type: 3}
   m_PrefabInstance: {fileID: 1422462506}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &16540950
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 16540951}
+  - component: {fileID: 16540952}
+  m_Layer: 0
+  m_Name: Roar
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &16540951
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 16540950}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1072715178}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &16540952
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 16540950}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3fb85f1360d167b4c8116c6833847f62, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyController: {fileID: 819742460}
+  roarDuration: 5.4
 --- !u!1 &18699400
 GameObject:
   m_ObjectHideFlags: 0
@@ -2467,6 +2513,7 @@ MonoBehaviour:
   idleState: {fileID: 1782623865}
   patrolState: {fileID: 580428141}
   seekState: {fileID: 2103461875}
+  roarState: {fileID: 16540952}
   attackState: {fileID: 1489495965}
   animator: {fileID: 1277978770}
   enemyNPC: {fileID: 819742461}
@@ -2581,6 +2628,11 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: a58d6a4fd9b32ee42bf5a7dbdbaebfda, type: 2}
+    - target: {fileID: 5866666021909216657, guid: 04ed618e15ad5df4c92f0cdbf7b44ab0,
+        type: 3}
+      propertyPath: m_UpdateMode
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5866666021909216657, guid: 04ed618e15ad5df4c92f0cdbf7b44ab0,
         type: 3}
       propertyPath: m_ApplyRootMotion
@@ -3871,6 +3923,7 @@ Transform:
   - {fileID: 837211659}
   - {fileID: 1782623864}
   - {fileID: 580428140}
+  - {fileID: 16540951}
   - {fileID: 2103461874}
   - {fileID: 1489495964}
   m_Father: {fileID: 819742457}

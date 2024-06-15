@@ -21,8 +21,9 @@ public class AttackState : BaseState
         Debug.Log("Enter Attack State");
     }
 
-    public override void Execute(EnemyController controller)
+    public override void Execute(EnemyController controller) 
     {
+        enemyController.animator.SetBool("Seek", true);
         Vector3 directionToPlayer = player.transform.position - enemyController.transform.position;
 
         RaycastHit hit;      
@@ -32,6 +33,7 @@ public class AttackState : BaseState
         {
             if (hit.collider.CompareTag("Player"))
             {
+                enemyController.animator.SetBool("Seek", false);
                 enemyController.animator.SetBool("Attack", true);
                 enemyController.enemyNPC.SetDestination(player.transform.position);
             }

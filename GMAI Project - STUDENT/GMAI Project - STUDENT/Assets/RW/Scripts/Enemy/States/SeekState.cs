@@ -29,12 +29,12 @@ public class SeekState : BaseState
     {
         seePlayer = true; 
         Debug.Log("Seeking player...");
-
+         
         enemyController.animator.SetBool("Seek", true);
     }
 
     public override void Execute(EnemyController controller)
-    { 
+    {  
         //Updates and holds player position
         Vector3 playerPos = player.transform.position;
      
