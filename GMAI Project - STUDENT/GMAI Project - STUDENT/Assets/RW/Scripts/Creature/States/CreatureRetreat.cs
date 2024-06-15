@@ -19,7 +19,7 @@ public class CreatureRetreat : MonoBehaviour
     [Task]
     public bool IsRetreatState()
     {
-        return _stateManager.currentStateName == "CreatureRetreat";
+        return _stateManager.currentStateName == "CreatureRetreat"; 
     }
 
     [Task]

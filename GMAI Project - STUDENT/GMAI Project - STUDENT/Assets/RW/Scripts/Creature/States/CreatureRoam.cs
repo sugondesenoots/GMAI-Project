@@ -16,6 +16,8 @@ public class CreatureRoam : MonoBehaviour
     //Bools for state transitions
     private bool isOthers;
     public float checkRadius = 3f;
+    private float senseTimePassed = 0f;
+    public float senseDuration = 3f;
 
     public void Initialize(CreatureStateManager stateManager, NavMeshAgent agent, Transform centre, float range)
     {
@@ -72,20 +74,28 @@ public class CreatureRoam : MonoBehaviour
     [Task]
     void SwitchToRetreatOrFollow()
     {
-        if (isOthers)
+        _stateManager.animator.SetBool("SenseOthers", true);
+
+        senseTimePassed += Time.deltaTime;
+
+        //Check if sense duration has passed
+        if (senseTimePassed >= senseDuration)
         {
-            _stateManager.SetCurrentState("CreatureRetreat");
-            Task.current.Succeed();
-        }
-        if (inventory.playerHasFood && isOthers)
-        {
-            _stateManager.SetCurrentState("CreatureFollowFood");
-            Task.current.Succeed();
-        }
-        else
-        {
-            Task.current.Fail();
-        }
+            if (isOthers)
+            {
+                _stateManager.SetCurrentState("CreatureRetreat");
+                Task.current.Succeed();
+            }
+            if (inventory.playerHasFood && isOthers)
+            {
+                _stateManager.SetCurrentState("CreatureFollowFood");
+                Task.current.Succeed();
+            }
+            else
+            {
+                Task.current.Fail();
+            }
+        }  
     }
      
     //Random generated position for roaming (Used this for my EnemyNPC FSM)

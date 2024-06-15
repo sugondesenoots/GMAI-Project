@@ -7,6 +7,7 @@ TagManager:
   - Shootable
   - EnemyNPC
   - Food
+  - Obstacle
   layers:
   - Default
   - TransparentFX
