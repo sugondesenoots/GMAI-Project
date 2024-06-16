@@ -102,7 +102,7 @@ public class Inventory : MonoBehaviour
             //Bools for FollowFood state
             playerHasFood = true;
             placedFood = false;
-}
+        }
     }
 
     private void PlaceItem()

@@ -10,9 +10,6 @@ namespace RayWenderlich.Unity.StatePatternInUnity
         private bool kick;
          
         private int meleeParam = Animator.StringToHash("IsMelee");
-        private int punchParam = Animator.StringToHash("Punch");
-        private int comboParam = Animator.StringToHash("ComboPunch");
-        private int kickParam = Animator.StringToHash("Kick");
 
         public MeleeState(Character character, StateMachine stateMachine) : base(character, stateMachine)
         {
@@ -42,7 +39,7 @@ namespace RayWenderlich.Unity.StatePatternInUnity
             if (equipMelee)
             {
                 character.SetAnimationBool(meleeParam, true);
-                //Debug.Log("Melee equipped");
+                Debug.Log("Melee equipped");
 
                 stateMachine.ChangeState(character.sheathing);
                 //Debug.Log("Going into sheathed state");
